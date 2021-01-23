@@ -1,11 +1,11 @@
 import React from 'react';
 
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
-import { handleRequest } from '../Services/APIManager'
+import { handleRequest } from '../../services/apiHandler';
+
 
 export default class AddText extends React.Component {
   constructor(props) {
@@ -24,9 +24,9 @@ export default class AddText extends React.Component {
   async saveText(event) {
     event.preventDefault();
     const data = { text_content: this.state.text };
-    const resp = await handleRequest('POST', `${this.props.textApiUrl}/create/`, data);
+    const url = `${this.props.TEXT_API}/create/`;
+    const resp = await handleRequest('POST', url, data);
     console.log(resp);
-    
   }
 
   render() {
@@ -47,7 +47,7 @@ export default class AddText extends React.Component {
             variant="contained" 
             color="primary"
             fullWidth={true}>
-              Add
+              Parse text
           </Button>
         </Box>
       </form>

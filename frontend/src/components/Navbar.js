@@ -15,7 +15,7 @@ export default function Navbar() {
           justify="space-around"
           alignItems="center"
         >
-          <Button color="inherit">Add text</Button>
+          <Button color="inherit">Parse text</Button>
           <Button color="inherit">Keyphrases rank</Button>
           <Button color="inherit">Text history</Button>
         </Grid>
