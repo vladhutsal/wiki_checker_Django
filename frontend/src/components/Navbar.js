@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-
 export default function Navbar() {
   return (
     <AppBar position="static" color="transparent">

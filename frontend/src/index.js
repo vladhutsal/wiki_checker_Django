@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { BrowserRouter } from 'react-router-dom';
 
-import Container from '@material-ui/core/Container';
-
 import App from './App';
+
+import Container from '@material-ui/core/Container';
 
 
 ReactDOM.render(

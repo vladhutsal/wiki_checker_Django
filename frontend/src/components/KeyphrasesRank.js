@@ -10,7 +10,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-
 export default function KeyphrasesRank(props) {
   const [keyphrases, setKeyphrases] = useState([]);
 
@@ -19,6 +18,7 @@ export default function KeyphrasesRank(props) {
       const resp = await handleRequest('GET', props.KP_API_URL);
       setKeyphrases(resp);
     }());
+  // eslint-disable-next-line
   }, []);
 
   const dataLength = keyphrases.length;

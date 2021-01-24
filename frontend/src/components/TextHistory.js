@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 
-
 export default function TextHistory(props) {
   const [texts, setTexts] = useState([]);
 
@@ -16,18 +15,20 @@ export default function TextHistory(props) {
       const resp = await handleRequest('GET', props.TEXT_API_URL);
       setTexts(resp);
     }());
+  // eslint-disable-next-line
   }, []);
 
     return (
     <Container>
     {texts.map(text => (
        <Card 
-        style={{ 
+        style={{
           margin: 'auto', 
           maxWidth: 800, 
-          marginTop: '10px' }} 
-          variant='outlined'
-          key={text.id}
+          marginTop: '10px' 
+        }} 
+        variant='outlined'
+        key={text.id}
         >
        <CardContent>
          <Typography>

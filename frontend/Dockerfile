@@ -1,6 +1,6 @@
 FROM node:alpine
-WORKDIR /app
-COPY package.json /app
+WORKDIR /frontend
+COPY package.json /frontend
 RUN yarn install
-COPY . app/
+COPY . /frontend
 EXPOSE 3000

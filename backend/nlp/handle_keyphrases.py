@@ -10,6 +10,9 @@ from api.serializers import  KpSerializer
 from rake_nltk import Rake
 from nltk.stem import WordNetLemmatizer
 
+import nltk
+nltk.download('wordnet')
+
 
 def clean(kp_list):
     nlp_dir_path = os.getcwd()

@@ -2,8 +2,8 @@ import React from 'react';
 
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import AddText from './AddTextComponent';
-import ParsedKeyphrases from './ParsedListComponent';
+import AddText from './AddText';
+import ParsedKeyphrases from './ParsedList';
 
 import { handleRequest } from '../../services/apiHandler';
 

@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-
 export default class AddText extends React.Component {
   constructor(props) {
     super(props);
