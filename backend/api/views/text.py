@@ -20,12 +20,3 @@ def parse_text(request):
         return Response(response, status=201)
 
     return Response({'msg': 'There was an error'}, status=400)
-
-
-# @api_view(['GET'])
-# def get_all(request):
-#     obj_qs = Text.objects.all()
-
-
-
-#     return Response({'msg': 'There was an error'}, status=400)

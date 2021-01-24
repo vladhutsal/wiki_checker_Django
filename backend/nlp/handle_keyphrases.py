@@ -2,9 +2,6 @@ import os
 import codecs
 import string
 
-from django.core.exceptions import ObjectDoesNotExist
-
-from nltk.util import pr
 from .handle_wiki import check_wiki_page
 
 from api.models import Keyphrase
@@ -44,14 +41,17 @@ def handle_keyphrases(text):
             kp_obj = Keyphrase.objects.get(kp_content=kp)
             kp_obj.score += 1
             kp_obj.save()
+            print(f'Score increased for {kp_obj.kp_content}')
 
-        except ObjectDoesNotExist:
+        except Keyphrase.DoesNotExist:
             kp_obj = Keyphrase.objects.create(kp_content=kp)
             link, dsmb = check_wiki_page(kp)
             if link:
                 kp_obj.wiki_link = link
                 kp_obj.disambiguation = dsmb
             kp_obj.save()
+            print(f'Key added to DB: {kp_obj.kp_content}')
+
         kp_list.append(kp_obj)
     
     serialized = KpSerializer(kp_list, many=True)

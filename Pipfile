@@ -11,6 +11,7 @@ python-rake = "*"
 rake-nltk = "*"
 wikipedia = "*"
 nltk = "*"
+spacy = "*"
 
 [dev-packages]
 yapf = "*"
