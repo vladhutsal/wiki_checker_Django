@@ -27,26 +27,32 @@ export default class AddText extends React.Component {
 
   render() {
     return (
-      <form onSubmit={ this.handleSubmit }>
-        <TextField
-          onChange={ this.handleChange }
-          value={ this.state.text }
-          multiline
-          rows={8}
-          variant="outlined" 
-          label="Put your text here" 
-          style = {{width: 800}} 
-        />
-        <Box mt={2}>
-          <Button
-            type='submit'
-            variant="contained" 
-            color="primary"
-            fullWidth={true}>
+      <Box
+        alignItems="center"
+        display="flex"
+        justifyContent="center"
+        mt={2}>
+        <form onSubmit={this.handleSubmit}>
+          <TextField
+            onChange={this.handleChange}
+            value={this.state.text}
+            multiline
+            rows={8}
+            variant="outlined"
+            label="Put your text here"
+            style={{ width: 800 }}
+          />
+          <Box mt={2}>
+            <Button
+              type='submit'
+              variant="contained"
+              color="white"
+              fullWidth={true}>
               Parse text
           </Button>
-        </Box>
-      </form>
+          </Box>
+        </form>
+      </Box>
     );
   }
 }
