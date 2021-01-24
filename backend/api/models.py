@@ -7,10 +7,10 @@ class Text(models.Model):
         return self.text_content
 
 class Keyphrase(models.Model):
-    keyphrase_content = models.CharField(max_length=100)
+    kp_content = models.CharField(max_length=100, unique=True)
     score = models.IntegerField(default=0)
     wiki_link = models.CharField(max_length=300, blank=True)
     disambiguation = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.keyphrase_content
+        return self.kp_content

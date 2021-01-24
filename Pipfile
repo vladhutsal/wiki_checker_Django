@@ -13,6 +13,7 @@ wikipedia = "*"
 nltk = "*"
 
 [dev-packages]
+yapf = "*"
 
 [requires]
 python_version = "3.9"

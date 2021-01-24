@@ -1,8 +1,14 @@
 import os
 import codecs
+import string
+
+from django.core.exceptions import ObjectDoesNotExist
+
+from nltk.util import pr
 from .handle_wiki import check_wiki_page
 
 from api.models import Keyphrase
+from api.serializers import  KpSerializer
 
 from rake_nltk import Rake
 from nltk.stem import WordNetLemmatizer
@@ -16,7 +22,8 @@ def clean(kp_list):
     lem = WordNetLemmatizer()
     filtered_text = filter(lambda x: x not in stop_words, kp_list)
     lemmatized_text = [lem.lemmatize(word) for word in filtered_text]
-    return lemmatized_text
+    raw_text = [w.translate(str.maketrans('', '', string.punctuation)) for w in lemmatized_text]
+    return raw_text
 
 
 def get_keyphrases(text):
@@ -29,18 +36,24 @@ def get_keyphrases(text):
     return clean(keyphrases)
 
 
-def handle_keywords(text):
-    added_to_db = []
+def handle_keyphrases(text):
+    kp_list = []
     keyphrases = get_keyphrases(text)
     for kp in keyphrases:
-        wiki_page = check_wiki_page(kp)
+        try:
+            kp_obj = Keyphrase.objects.get(kp_content=kp)
+            kp_obj.score += 1
+            kp_obj.save()
 
-        new_keyphrase = Keyphrase(
-            keyphrase_content=kp,
-            wiki_link=wiki_page.get('url'),
-            disambiguation=wiki_page.get('dsmb')
-        )
-        new_keyphrase.save()
-        added_to_db.append(new_keyphrase)
+        except ObjectDoesNotExist:
+            kp_obj = Keyphrase.objects.create(kp_content=kp)
+            link, dsmb = check_wiki_page(kp)
+            if link:
+                kp_obj.wiki_link = link
+                kp_obj.disambiguation = dsmb
+            kp_obj.save()
+        kp_list.append(kp_obj)
     
-    return {'saved': added_to_db, 'kp': keyphrases}
+    serialized = KpSerializer(kp_list, many=True)
+    
+    return serialized.data

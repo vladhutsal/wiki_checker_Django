@@ -1,1 +1,1 @@
-from .handle_keywords import *
+from .handle_keyphrases import *

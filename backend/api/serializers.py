@@ -13,4 +13,4 @@ class KpSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Keyphrase
-        fields = ('id', 'keyphrase_content', 'score', 'is_on_wiki', 'wiki_link')
+        fields = ('id', 'kp_content', 'score', 'wiki_link', 'disambiguation')

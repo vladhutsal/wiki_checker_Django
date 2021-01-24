@@ -1,6 +1,6 @@
 import wikipedia as wiki
 from wikipedia import WikipediaPage as WikiPage
-from wikipedia.exceptions import DisambiguationError
+from wikipedia.exceptions import DisambiguationError, PageError
 
 
 def check_disambiguation(wiki_results):
@@ -10,11 +10,11 @@ def check_disambiguation(wiki_results):
     return False
 
 
-def get_wiki_page(page):
+def get_wiki_page(page_name):
     try:
-        res = wiki.page(page)
+        res = wiki.page(page_name)
     except DisambiguationError as e:
-        best_related = e.args[0][1]
+        best_related = e.args[1][0]
         res = wiki.page(best_related)
 
     return res
@@ -26,16 +26,23 @@ def check_page_for_keyphrase(bm, kp):
 
 
 def check_wiki_page(keyphrase):
-    wiki_results = wiki.search(keyphrase)
-    best_match = wiki_results[0]
+    try:
+        wiki_results = wiki.search(keyphrase)
+        best_match = wiki_results[0]
 
-    url = get_wiki_page(keyphrase).url
-    disambiguation = False
+        url = get_wiki_page(keyphrase).url
+        disambiguation = False
 
-    if best_match == keyphrase:
-        disambiguation = check_disambiguation(wiki_results)
+        if best_match == keyphrase:
+            disambiguation = check_disambiguation(wiki_results)
 
-    elif check_page_for_keyphrase(best_match, keyphrase):
-        url = wiki.page(best_match).url
+        elif check_page_for_keyphrase(best_match, keyphrase):
+            url = get_wiki_page(best_match).url
         
-    return {'url': url, 'dsmb': disambiguation}
+        else:
+            url = None
+            
+        return url, disambiguation
+
+    except PageError:
+        return None, False

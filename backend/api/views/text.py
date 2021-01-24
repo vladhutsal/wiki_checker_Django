@@ -1,9 +1,8 @@
-from nlp import handle_keywords
-from rest_framework import serializers
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from nlp import handle_keyphrases
+from ..models import Text
 from ..serializers import TextSerializer, KpSerializer
 
 
@@ -12,13 +11,21 @@ def parse_text(request):
     obj = TextSerializer(data=request.data)
     if obj.is_valid(raise_exception=True):
         obj.save()
-        saved = handle_keywords(obj.data.get('text_content'))
-        print(saved.get('saved'))
+        serialized_kp_objects = handle_keyphrases(obj.data.get('text_content'))
         
         response = {
-            'data': saved.get('kp'),
-            'msg': 'text saved'
+            'data': serialized_kp_objects,
+            'msg': 'text saved, keyphrases saved/updated'
         }
         return Response(response, status=201)
 
     return Response({'msg': 'There was an error'}, status=400)
+
+
+# @api_view(['GET'])
+# def get_all(request):
+#     obj_qs = Text.objects.all()
+
+
+
+#     return Response({'msg': 'There was an error'}, status=400)
