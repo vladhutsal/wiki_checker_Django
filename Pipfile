@@ -8,6 +8,9 @@ django = "*"
 django-rest-framework = "*"
 django-cors-headers = "*"
 python-rake = "*"
+rake-nltk = "*"
+wikipedia = "*"
+nltk = "*"
 
 [dev-packages]
 
