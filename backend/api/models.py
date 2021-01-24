@@ -17,5 +17,3 @@ class Keyphrase(models.Model):
 
     def __str__(self):
         return self.kp_content
-    
-    
