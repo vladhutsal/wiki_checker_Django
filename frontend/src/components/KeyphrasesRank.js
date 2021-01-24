@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import {handleRequest} from '../services/apiHandler';
+import { handleRequest } from '../services/apiHandler';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -11,54 +11,49 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 
-export default class KeyphrasesRank extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      all_keyphrases: []
-    };
-  }
+export default function KeyphrasesRank(props) {
+  const [keyphrases, setKeyphrases] = useState([]);
 
-  async componentDidMount() {
-    const resp = await handleRequest('GET', this.props.KP_API_URL);
-    
-  }
+  useEffect(() => {
+    (async function () {
+      const resp = await handleRequest('GET', props.KP_API_URL);
+      setKeyphrases(resp);
+    }());
+  }, []);
 
-  render() {
-    const dataLength = this.state.all_keyphrases.length;
+  const dataLength = keyphrases.length;
 
-    return (
-      <TableContainer component={Paper} style={{'marginTop': '10px'}}>
-        <Table size="medium" aria-label="dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={{'fontWeight': 'bold'}}>Keyphrase</TableCell>
-              <TableCell style={{'fontWeight': 'bold'}}>Rank</TableCell>
-            </TableRow>
-          </TableHead>
+  return (
+    <TableContainer component={Paper} style={{ 'marginTop': '10px' }}>
+      <Table size="medium" aria-label="dense table">
+        <TableHead>
+          <TableRow>
+            <TableCell style={{ 'fontWeight': 'bold' }}>Keyphrase</TableCell>
+            <TableCell style={{ 'fontWeight': 'bold' }}>Rank</TableCell>
+          </TableRow>
+        </TableHead>
 
-          <TableBody>
-            {dataLength > 0 &&
-              this.state.all_keyphrases.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell scope="row">
-                    {row.kp_content}
-                  </TableCell>
-                  <TableCell scope="row">
-                    {row.score}
-                  </TableCell>
-                </TableRow>
-              ))}
-
-            {dataLength <= 0 &&
-              <TableRow>
+        <TableBody>
+          {dataLength > 0 &&
+            keyphrases.map(row => (
+              <TableRow key={row.id}>
                 <TableCell scope="row">
-                  Sorry, there is no data. Add something to see the table
+                  {row.kp_content}
                 </TableCell>
-              </TableRow>}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+                <TableCell scope="row">
+                  {row.score}
+                </TableCell>
+              </TableRow>
+            ))}
+
+          {dataLength <= 0 &&
+            <TableRow>
+              <TableCell scope="row">
+                Sorry, there is no data. Add something to see the table
+                </TableCell>
+            </TableRow>}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }

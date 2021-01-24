@@ -20,7 +20,7 @@ export default class ParseTextContainer extends React.Component {
 
   async saveText(text_content) {
     const data = { text_content: text_content };
-    const url = `${this.props.TEXT_API}/create/`;
+    const url = this.props.TEXT_API_URL;
 
     const resp = await handleRequest('POST', url, data);
     this.toogleLoading(false);
@@ -39,11 +39,11 @@ export default class ParseTextContainer extends React.Component {
     return (
       <Container>
         <AddText
-          TEXT_API={this.state.TEXT_API}
           saveText={this.saveText}
           keyphrases={this.state.keyphrases} 
           toogleLoading={this.toogleLoading} 
-          isLoading={this.state.loading} 
+          isLoading={this.state.loading}
+          updateKeys={this.props.updateKeys}
         />
 
         <Box>

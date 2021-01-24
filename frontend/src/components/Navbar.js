@@ -18,7 +18,7 @@ export default function Navbar() {
         >
           <Button href='/add_text'>Parse text</Button>
           <Button href='/rank'>Keyphrases rank</Button>
-          <Button>Text history</Button>
+          <Button href='/text_history'>Text history</Button>
         </Grid>
       </Toolbar>
     </AppBar>

@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 
-const ParsedKeyphrases = (props) => {
+export default function ParsedKeyphrases(props) {
   const dsmb = props.kp_dsmb ? 'Disambiguous' : 'Ambiguous';
   const canSubmit = props.kp_link.length > 0;
 
@@ -37,5 +37,3 @@ const ParsedKeyphrases = (props) => {
     </Card>
   );
 }
-
-export default ParsedKeyphrases;
