@@ -4,8 +4,6 @@ import Navbar from './components/Navbar';
 import ParseTextContainer from './components/ParseText/ParseTextContainer';
 import KeyphrasesRank from './components/KeyphrasesRank';
 
-import {handleRequest} from './services/apiHandler';
-
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -15,15 +13,7 @@ export default class App extends React.Component {
       TEXT_API_URL: 'http://127.0.0.1:8000/api/text',
       KP_API_URL: 'http://127.0.0.1:8000/api/kp/get_all',
       all_keyphrases: []
-    }
-  }
-
-  async componentDidMount() {
-    const resp = await handleRequest('GET', this.state.KP_API_URL);
-    this.setState({
-      all_keyphrases: resp
-    });
-    console.log(this.state.all_keyphrases)
+    };
   }
 
   render() {
@@ -43,7 +33,7 @@ export default class App extends React.Component {
 
           <Route exact path='/rank' render={props => (
             <KeyphrasesRank {...props} 
-              kp_list={this.state.all_keyphrases}/>
+              KP_API_URL={this.state.KP_API_URL} />
           )} />
 
         </Switch>

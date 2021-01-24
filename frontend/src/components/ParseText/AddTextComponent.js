@@ -3,7 +3,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 export default class AddText extends React.Component {
@@ -22,10 +22,12 @@ export default class AddText extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.toogleLoading(true);
     this.props.saveText(this.state.text);
   }
 
   render() {
+    const isLoading = this.props.isLoading;
     return (
       <Box
         alignItems="center"
@@ -46,12 +48,14 @@ export default class AddText extends React.Component {
             <Button
               type='submit'
               variant="contained"
-              color="white"
+              color="primary"
               fullWidth={true}>
               Parse text
           </Button>
+            {isLoading && <LinearProgress width='100%' style={{ 'marginTop': '5px' }} />}
           </Box>
         </form>
+
       </Box>
     );
   }

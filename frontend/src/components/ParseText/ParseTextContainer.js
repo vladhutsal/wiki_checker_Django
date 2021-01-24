@@ -1,11 +1,9 @@
 import React from 'react';
 
-import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import AddText from './AddText';
-import ParsedKeyphrases from './ParsedKeyphrases';
+import AddText from './AddTextComponent';
+import ParsedKeyphrases from './ParsedListComponent';
 
 import { handleRequest } from '../../services/apiHandler';
 
@@ -13,9 +11,11 @@ export default class ParseTextContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      keyphrases: []
+      keyphrases: [],
+      loading: false
     }
     this.saveText = this.saveText.bind(this);
+    this.toogleLoading = this.toogleLoading.bind(this);
   }
 
   async saveText(text_content) {
@@ -23,20 +23,28 @@ export default class ParseTextContainer extends React.Component {
     const url = `${this.props.TEXT_API}/create/`;
 
     const resp = await handleRequest('POST', url, data);
+    this.toogleLoading(false);
     this.setState({
       keyphrases: resp
-    })
-    console.log(resp);
+    });
+  }
+
+  toogleLoading(toogle) {
+    this.setState({
+      loading: toogle
+    });
   }
 
   render() {
     return (
       <Container>
-
         <AddText
           TEXT_API={this.state.TEXT_API}
           saveText={this.saveText}
-          keyphrases={this.state.keyphrases} />
+          keyphrases={this.state.keyphrases} 
+          toogleLoading={this.toogleLoading} 
+          isLoading={this.state.loading} 
+        />
 
         <Box>
           {this.state.keyphrases.map(kp => (

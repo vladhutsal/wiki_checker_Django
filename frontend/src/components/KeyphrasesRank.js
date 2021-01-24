@@ -1,12 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+
+import {handleRequest} from '../services/apiHandler';
+
+import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 
 export default class KeyphrasesRank extends React.Component {
@@ -17,22 +19,27 @@ export default class KeyphrasesRank extends React.Component {
     };
   }
 
+  async componentDidMount() {
+    const resp = await handleRequest('GET', this.props.KP_API_URL);
+    
+  }
+
   render() {
-    const dataLength = this.props.kp_list.length;
+    const dataLength = this.state.all_keyphrases.length;
 
     return (
-      <TableContainer component={Paper} style={{'margin-top': '10px'}}>
+      <TableContainer component={Paper} style={{'marginTop': '10px'}}>
         <Table size="medium" aria-label="dense table">
           <TableHead>
             <TableRow>
-              <TableCell style={{'font-weight': 'bold'}}>Keyphrase</TableCell>
-              <TableCell style={{'font-weight': 'bold'}}>Rank</TableCell>
+              <TableCell style={{'fontWeight': 'bold'}}>Keyphrase</TableCell>
+              <TableCell style={{'fontWeight': 'bold'}}>Rank</TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
             {dataLength > 0 &&
-              this.props.kp_list.map(row => (
+              this.state.all_keyphrases.map(row => (
                 <TableRow key={row.id}>
                   <TableCell scope="row">
                     {row.kp_content}
@@ -42,6 +49,7 @@ export default class KeyphrasesRank extends React.Component {
                   </TableCell>
                 </TableRow>
               ))}
+
             {dataLength <= 0 &&
               <TableRow>
                 <TableCell scope="row">
@@ -53,5 +61,4 @@ export default class KeyphrasesRank extends React.Component {
       </TableContainer>
     );
   }
-
 }
