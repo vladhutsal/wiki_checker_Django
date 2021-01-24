@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
-import { handleRequest } from '../../services/apiHandler';
 
 
 export default class AddText extends React.Component {
@@ -14,24 +13,21 @@ export default class AddText extends React.Component {
       text: ''
     }
     this.handleChange = this.handleChange.bind(this);
-    this.saveText = this.saveText.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ text: event.target.value })
   }
 
-  async saveText(event) {
+  handleSubmit(event) {
     event.preventDefault();
-    const data = { text_content: this.state.text };
-    const url = `${this.props.TEXT_API}/create/`;
-    const resp = await handleRequest('POST', url, data);
-    console.log(resp);
+    this.props.saveText(this.state.text);
   }
 
   render() {
     return (
-      <form onSubmit={ this.saveText }>
+      <form onSubmit={ this.handleSubmit }>
         <TextField
           onChange={ this.handleChange }
           value={ this.state.text }
