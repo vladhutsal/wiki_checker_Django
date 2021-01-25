@@ -3,7 +3,6 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default class AddText extends React.Component {
   constructor(props) {
@@ -16,7 +15,10 @@ export default class AddText extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ text: event.target.value })
+    if (this.props.showErr) {
+      this.props.toogleShowErr(false);
+    }
+    this.setState({ text: event.target.value });
   }
 
   handleSubmit(event) {
@@ -26,7 +28,6 @@ export default class AddText extends React.Component {
   }
 
   render() {
-    const isLoading = this.props.isLoading;
     return (
       <Box
         alignItems="center"
@@ -42,6 +43,7 @@ export default class AddText extends React.Component {
             variant="outlined"
             label="Put your text here"
             style={{ width: 800 }}
+            required
           />
           
           <Box mt={2}>
@@ -52,12 +54,6 @@ export default class AddText extends React.Component {
               fullWidth={true}>
               Parse text
           </Button>
-
-            {isLoading &&
-              <LinearProgress
-                width='100%'
-                style={{ 'marginTop': '5px' }}
-            />}
           </Box>
         </form>
 

@@ -13,7 +13,7 @@ export default function TextHistory(props) {
   useEffect(() => {
     (async function () {
       const resp = await handleRequest('GET', props.TEXT_API_URL);
-      setTexts(resp);
+      setTexts(resp.data);
     }());
     // eslint-disable-next-line
   }, []);

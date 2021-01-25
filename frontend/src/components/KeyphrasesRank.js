@@ -17,7 +17,7 @@ export default function KeyphrasesRank(props) {
   useEffect(() => {
     (async function () {
       const resp = await handleRequest('GET', props.KP_API_URL);
-      setKeyphrases(resp);
+      setKeyphrases(resp.data);
     }());
     // eslint-disable-next-line
   }, []);

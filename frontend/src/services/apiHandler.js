@@ -12,5 +12,5 @@ export async function handleRequest(method, url, data) {
     };
     const resp = await fetch(url, request);
     const respContent = await resp.json();
-    return respContent.data;
+    return respContent;
   }
