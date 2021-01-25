@@ -12,16 +12,14 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       TEXT_API_URL: 'http://127.0.0.1:8000/api/text',
-      KP_API_URL: 'http://127.0.0.1:8000/api/kp/get_all',
-
-      allKeyphrases: [],
+      KP_API_URL: 'http://127.0.0.1:8000/api/kp/get_all'
     };
   }
 
   render() {
     return (
       <>
-        <Navbar></Navbar>
+        <Navbar />
         <Switch>
 
           <Route exact path='/'>
@@ -31,17 +29,17 @@ export default class App extends React.Component {
           <Route exact path='/add_text' render={props => (
             <ParseTextContainer {...props}
               TEXT_API_URL={`${this.state.TEXT_API_URL}/create/`}
-             />
+            />
           )} />
 
           <Route exact path='/rank' render={props => (
-            <KeyphrasesRank {...props} 
+            <KeyphrasesRank {...props}
               KP_API_URL={this.state.KP_API_URL}
             />
           )} />
 
           <Route exact path='/text_history' render={props => (
-            <TextHistory {...props} 
+            <TextHistory {...props}
               TEXT_API_URL={`${this.state.TEXT_API_URL}/get_all`}
             />
           )} />

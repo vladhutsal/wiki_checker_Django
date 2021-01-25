@@ -43,6 +43,7 @@ export default class AddText extends React.Component {
             label="Put your text here"
             style={{ width: 800 }}
           />
+          
           <Box mt={2}>
             <Button
               type='submit'
@@ -51,7 +52,12 @@ export default class AddText extends React.Component {
               fullWidth={true}>
               Parse text
           </Button>
-            {isLoading && <LinearProgress width='100%' style={{ 'marginTop': '5px' }} />}
+
+            {isLoading &&
+              <LinearProgress
+                width='100%'
+                style={{ 'marginTop': '5px' }}
+            />}
           </Box>
         </form>
 

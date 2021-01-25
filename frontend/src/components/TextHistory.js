@@ -11,33 +11,33 @@ export default function TextHistory(props) {
   const [texts, setTexts] = useState([]);
 
   useEffect(() => {
-    (async function() {
+    (async function () {
       const resp = await handleRequest('GET', props.TEXT_API_URL);
       setTexts(resp);
     }());
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
-    return (
+  return (
     <Container>
-    {texts.map(text => (
-       <Card 
-        style={{
-          margin: 'auto', 
-          maxWidth: 800, 
-          marginTop: '10px' 
-        }} 
-        variant='outlined'
-        key={text.id}
+      {texts.map(text => (
+        <Card
+          style={{
+            margin: 'auto',
+            maxWidth: 800,
+            marginTop: '10px'
+          }}
+          variant='outlined'
+          key={text.id}
         >
-       <CardContent>
-         <Typography>
-           {text.text_content}
-         </Typography>
-       </CardContent>
-     </Card>
-    ))}
-   
+          <CardContent>
+            <Typography>
+              {text.text_content}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+
     </Container>
   );
 }

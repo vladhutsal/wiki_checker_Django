@@ -11,17 +11,28 @@ export default function ParsedKeyphrases(props) {
   const canSubmit = props.kp_link.length > 0;
 
   return (
-    <Card style={{ margin: 'auto', maxWidth: 800, 'marginTop': '10px' }} variant='outlined'>
+    <Card
+      variant='outlined'
+      style={{
+        margin: 'auto',
+        maxWidth: 800,
+        marginTop: '10px'
+      }}
+    >
       <CardContent>
+
         <Typography variant="h5" component="h2">
           {props.kp_content}
         </Typography>
+
         <Typography color="textSecondary" >
           Score - {props.kp_score}
         </Typography>
+
         <Typography variant="caption" display="block">
           {dsmb}
         </Typography>
+
       </CardContent>
       <CardActions>
         <Button
@@ -29,9 +40,10 @@ export default function ParsedKeyphrases(props) {
           size="small"
           href={props.kp_link}
           disabled={!canSubmit}
-          color="default">
+          color="default"
+        >
           Wiki link
-            </Button>
+        </Button>
       </CardActions>
     </Card>
   );

@@ -12,16 +12,15 @@ import TableRow from '@material-ui/core/TableRow';
 
 export default function KeyphrasesRank(props) {
   const [keyphrases, setKeyphrases] = useState([]);
+  const dataLength = keyphrases.length;
 
   useEffect(() => {
     (async function () {
       const resp = await handleRequest('GET', props.KP_API_URL);
       setKeyphrases(resp);
     }());
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
-
-  const dataLength = keyphrases.length;
 
   return (
     <TableContainer component={Paper} style={{ 'marginTop': '10px' }}>
