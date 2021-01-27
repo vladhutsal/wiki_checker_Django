@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Navbar from './components/Navbar';
-import ParseTextContainer from './components/ParseText/ParseTextContainer';
-import KeyphrasesRank from './components/KeyphrasesRank';
-import TextHistory from './components/TextHistory';
+import ParseTextContainer from './components/views/ParseText/ParseTextContainer';
+import KeyphrasesRank from './components/views/KeyphrasesRank';
+import TextHistory from './components/views/TextHistory';
 
 import { Switch, Route, Redirect } from 'react-router-dom';
 

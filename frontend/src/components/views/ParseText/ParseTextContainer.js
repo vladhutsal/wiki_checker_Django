@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ParsedKeyphrases from './ParsedList';
-import { handleRequest } from '../../services/apiHandler';
-import TextError from '../Errors/AddTextError';
+import { handleRequest } from '../../../services/apiHandler';
+import TextError from '../../Errors/AddTextError';
 
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -51,6 +51,7 @@ export default class ParseTextContainer extends React.Component {
     const serverErr = this.state.showServerErr;
     const serverMsg = this.state.serverMsg;
     const keyphrases = this.state.keyphrases;
+
     return (
       <Container align='center'>
         <AddText

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { handleRequest } from '../services/apiHandler';
+import { handleRequest } from '../../services/apiHandler';
 
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';

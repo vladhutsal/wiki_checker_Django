@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { handleRequest } from '../services/apiHandler';
+import { handleRequest } from '../../services/apiHandler';
+import WikiLinkButton from '../Buttons/WikiLinkButton';
 
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -29,19 +30,34 @@ export default function KeyphrasesRank(props) {
           <TableRow>
             <TableCell style={{ 'fontWeight': 'bold' }}>Keyphrase</TableCell>
             <TableCell style={{ 'fontWeight': 'bold' }}>Rank</TableCell>
+            <TableCell style={{ 'fontWeight': 'bold' }}>Ambiguation</TableCell>
+            <TableCell style={{ 'fontWeight': 'bold' }}>Link</TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
           {dataLength > 0 &&
             keyphrases.map(row => (
+
               <TableRow key={row.id}>
                 <TableCell scope="row">
                   {row.kp_content}
                 </TableCell>
+
                 <TableCell scope="row">
                   {row.score}
                 </TableCell>
+
+                <TableCell scope="row">
+                  {!row.disambiguation && <p>Ambiguous</p>}
+                  {row.disambiguation && <p>Disambiguous</p>}
+                </TableCell>
+
+                <TableCell scope="row">
+                  <WikiLinkButton link={row.wiki_link}/>
+                 
+                </TableCell>
+
               </TableRow>
             ))}
 
