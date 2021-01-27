@@ -8,21 +8,18 @@ from .serializers import TextSerializer, KpSerializer
 
 @api_view(['POST'])
 def parse_text(request):
-    try:
-        obj = TextSerializer(data=request.data)
+    obj = TextSerializer(data=request.data)
+    kp_list = handle_keyphrases(request.data.get('text_content'))
 
-        if obj.is_valid():
-            obj.save()
-            msg = 'text saved, keyphrases saved/updated'
-        else:
-            msg = 'Text already exists'
-
-        serialized_kp_objects = handle_keyphrases(obj.data.get('text_content'))
-        return Response({'data': serialized_kp_objects, 'msg': msg}, status=201)
-    except:
-        return Response({'msg': 'Server error'}, status=500)
-
-    
+    if obj.is_valid():
+        obj_instance = obj.save()
+        obj_instance.keyphrases.set(kp_list)
+        msg = 'text saved, keyphrases saved/updated'
+    else:
+        msg = 'Text already exists'
+        
+    serialized = KpSerializer(kp_list, many=True)
+    return Response({'data': serialized.data, 'msg': msg}, status=201)
 
 
 @api_view(['GET'])
