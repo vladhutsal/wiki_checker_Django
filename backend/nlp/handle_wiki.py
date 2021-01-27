@@ -10,20 +10,15 @@ def check_disambiguation(kp):
 
 
 def check_wiki_page(keyphrase):
-    try:
+    try: 
         try:
-            print('Checking Wiki...')
-            wiki_page = wiki.page(keyphrase)
-        except DisambiguationError as e:
-            wiki_page = wiki.page(e.args[1][0])
-
-        if wiki_page:
-            url = wiki_page.url
+            url = wiki.page(keyphrase).url
             dsmb = check_disambiguation(keyphrase)
-            return url, dsmb
-        else:
-            raise PageError
+        except DisambiguationError:
+            url = None
+            dsmb = True
+        return url, dsmb
         
     except PageError:
         return None, False
-        
+    
