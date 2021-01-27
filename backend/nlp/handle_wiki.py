@@ -5,8 +5,8 @@ from wikipedia.exceptions import DisambiguationError, PageError
 def check_disambiguation(kp):
     for result in wiki.search(kp):
         if 'disambiguation' in result:
-            return True
-    return False
+            return False
+    return True
 
 
 def check_wiki_page(keyphrase):
@@ -16,9 +16,9 @@ def check_wiki_page(keyphrase):
             dsmb = check_disambiguation(keyphrase)
         except DisambiguationError:
             url = None
-            dsmb = True
+            dsmb = False
         return url, dsmb
         
     except PageError:
-        return None, False
+        return None, None
     

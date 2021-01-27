@@ -8,7 +8,18 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 export default function ParsedKeyphrases(props) {
-  const dsmb = props.kp_dsmb ? 'Disambiguous' : 'Ambiguous';
+    let dsmb = '';
+    console.log(props.kp_dsmb);
+    switch(props.kp_dsmb) {
+    case true:
+      dsmb = 'Disambiguous';
+      break;
+    case false:
+      dsmb = 'Ambiguous';
+      break;
+    default:
+      dsmb = 'No info';
+  }
 
   return (
     <Card

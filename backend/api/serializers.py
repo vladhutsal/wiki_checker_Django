@@ -16,5 +16,5 @@ class KpSerializer(serializers.ModelSerializer):
             'kp_content',
             'score',
             'wiki_link',
-            'disambiguation'
+            'disambiguous'
         )

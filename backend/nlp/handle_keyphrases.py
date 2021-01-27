@@ -58,7 +58,7 @@ def handle_keyphrases(text):
             kp_obj = Keyphrase.objects.create(kp_content=kp)
             link, dsmb = check_wiki_page(kp)
             kp_obj.wiki_link = link
-            kp_obj.disambiguation = dsmb
+            kp_obj.disambiguous = dsmb
 
             kp_obj.save()
             print(f'Key added to DB: {kp_obj.kp_content}')

@@ -4,7 +4,7 @@ class Keyphrase(models.Model):
     kp_content = models.CharField(max_length=100, unique=True)
     score = models.IntegerField(default=1)
     wiki_link = models.CharField(max_length=300, null=True)
-    disambiguation = models.BooleanField(default=False)
+    disambiguous = models.BooleanField(default=True, null=True)
 
     class Meta:
         ordering = ['-score']

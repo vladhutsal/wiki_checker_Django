@@ -82,7 +82,7 @@ export default class ParseTextContainer extends React.Component {
                 key={kp.id}
                 kp_content={kp.kp_content}
                 kp_link={kp.wiki_link}
-                kp_dsmb={kp.disambiguation}
+                kp_dsmb={kp.disambiguous}
                 kp_score={kp.score} />
             ))}
         </Box>

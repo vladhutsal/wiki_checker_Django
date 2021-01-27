@@ -49,8 +49,9 @@ export default function KeyphrasesRank(props) {
                 </TableCell>
 
                 <TableCell scope="row">
-                  {!row.disambiguation && <p>Ambiguous</p>}
-                  {row.disambiguation && <p>Disambiguous</p>}
+                  {row.disambiguous === false  && <p>Ambiguous</p>}
+                  {row.disambiguous === true && <p>Disambiguous</p>}
+                  {row.disambiguous === null && <p>No info</p>}
                 </TableCell>
 
                 <TableCell scope="row">
